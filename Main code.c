@@ -3,6 +3,12 @@ servo myservo1;
 servo myservo2;
 servo myservo3;
 servo myservo4;
+enum state {left, right};
+state var;
+Servo myservo; 
+int pos;
+long duration, cm;
+const int pingPin = 7;
 
 int pos = 0;
 void setup()
@@ -13,6 +19,9 @@ void setup()
     myservo4.attach(10); // grabbing motor
     Serial.begin(9600);  // serial connection for communication
     int potpin = 0;
+  myservo.attach(10);
+  var = left;
+  pos = 60;
 }
 
 void nav_traverse (int direction)
@@ -112,7 +121,43 @@ void IR()
 
 void ultrasonic()
 {
-    return 0;
+  switch (var) {
+
+    case left:
+    pos += 1;
+    myservo.write(pos);                   // sets the servo position based on the variable 'pos'
+    delay(15);
+    if (pos ==  120)
+    {
+      var = right;
+    }
+    break;
+
+    case right:
+    pos -= 1;
+    myservo.write(pos);
+    delay(15);                   // sets the servo position based on the variable 'pos'
+    if (pos ==  60)
+    {
+      var = left;
+    }
+    break;
+    
+  }
+  pinMode(pingPin, OUTPUT);
+    digitalWrite(pingPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(pingPin, HIGH);
+    delayMicroseconds(5);
+    digitalWrite(pingPin, LOW);
+
+    pinMode(pingPin, INPUT);
+    duration = pulseIn(pingPin, HIGH);
+
+    cm = duration / 29 / 2;
+    Serial.print(cm);
+    Serial.print("cm");
+    Serial.println();
 }
 
 void ramp_sequence()
