@@ -26,41 +26,46 @@ void nav_traverse(int direction) // code for navigating the map
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
     myservo2.attach(13); // left wheel
-    switch (direction)
+    if(direction == 1) // forward
     {
-    case '1': // forward
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(50);
-        break;
-    case '2': // backward
+    }
+    else if(direction == 2) // backward
+    { 
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(50);
-        break;
-    case '3': // right
+        }
+    else if(direction == 3) // right
+    {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(500);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '4': // left
+        }
+    else if(direction == 4) // left
+    {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(500);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '5': // stop
+        }
+    else if(direction == 5) // stop
+    {
         myservo1.detach();
         myservo2.detach();
-        break;
-    default:
+        }
+    else{
         return;
+    }
     }
     myservo1.write(val1);
     myservo2.write(val2);
+    delay(15);
     return 0;
 }
 
