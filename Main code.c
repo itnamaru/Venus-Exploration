@@ -140,7 +140,7 @@ void ramp_sequence(int ramp)
 
         // drive forward until stopped at end
         nav_traverse(1);
-        delay(2000);
+        delay(7000);
         nav_traverse(5);
         delay(5000);
 
@@ -148,7 +148,10 @@ void ramp_sequence(int ramp)
 
         // drive back
         nav_traverse(2);
-        delay(2000);
+        for (int i = 0; i < 7; i++)
+        {
+            delay(1000);
+        }
         nav_traverse(5);
         // validate out of ramp
 
