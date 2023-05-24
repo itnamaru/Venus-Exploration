@@ -26,42 +26,42 @@ void nav_traverse(int direction) // code for navigating the map
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
     myservo2.attach(13); // left wheel
-    if(direction == 1) // forward
+    if (direction == 1)  // forward
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(50);
     }
-    else if(direction == 2) // backward
-    { 
+    else if (direction == 2) // backward
+    {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(50);
-        }
-    else if(direction == 3) // right
+    }
+    else if (direction == 3) // right
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(500);
         myservo1.detach();
         myservo2.detach();
-        }
-    else if(direction == 4) // left
+    }
+    else if (direction == 4) // left
     {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(500);
         myservo1.detach();
         myservo2.detach();
-        }
-    else if(direction == 5) // stop
+    }
+    else if (direction == 5) // stop
     {
         myservo1.detach();
         myservo2.detach();
-        }
-    else{
+    }
+    else
+    {
         return;
-    }
     }
     myservo1.write(val1);
     myservo2.write(val2);
@@ -141,20 +141,15 @@ void ramp_sequence(int ramp)
         // drive forward until stopped at end
         nav_traverse(1);
         delay(2000);
-        myservo1.detach();
-        myservo2.detach();
-        myservo1.attach(12); // right wheel
-        myservo2.attach(13); // left wheel
+        nav_traverse(5);
+        delay(5000);
 
         // release box
 
         // drive back
         nav_traverse(2);
         delay(2000);
-        myservo1.detach();
-        myservo2.detach();
-        myservo1.attach(12); // right wheel
-        myservo2.attach(13); // left wheel
+        nav_traverse(5);
         // validate out of ramp
 
         // close set arms back to initial position
