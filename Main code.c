@@ -127,6 +127,10 @@ void ultrasonic() // US sensor code
     return 0;
 }
 
+void grabby(){
+return 0;
+}
+
 void ramp_sequence(int ramp)
 {
     if (ramp == 1)
@@ -145,13 +149,10 @@ void ramp_sequence(int ramp)
         delay(5000);
 
         // release box
-
+        grabby();
         // drive back
         nav_traverse(2);
-        for (int i = 0; i < 7; i++)
-        {
-            delay(1000);
-        }
+        delay(7000);
         nav_traverse(5);
         // validate out of ramp
 
@@ -202,6 +203,7 @@ void locate_ramp(int go_to_base)
 
 void loop()
 {
+    delay(5000);
     ramp_sequence(1);
     delay(5000);
     Serial.print('Done');
