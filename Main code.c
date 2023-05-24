@@ -13,9 +13,11 @@ void setup()
     myservo4.attach(10); // grabbing motor
     Serial.begin(9600);  // serial connection for communication
     int potpin = 0;
+    bool ramp = 1;
+    bool go_to_base = 0;
 }
 
-void nav_traverse (int direction)
+void nav_traverse(int direction) // code for navigating the map
 {
     val1 = analogRead(potpin);
     val2 = analogRead(potpin);
@@ -58,7 +60,9 @@ void nav_traverse (int direction)
     myservo2.write(val2);
     return 0;
 }
-void nav_grab(){
+
+void nav_grab() // code for small increment movement for the grabbing sequence
+{
     val1 = analogRead(potpin);
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
@@ -105,25 +109,87 @@ void nav_grab(){
     return 0;
 }
 
-void IR()
+void IR() // IR sensor code
 {
     return 0;
 }
 
-void ultrasonic()
+void ultrasonic() // US sensor code
 {
     return 0;
 }
 
-void ramp_sequence()
+void ramp_sequence(bool ramp)
 {
+    if (ramp == 1)
+    {
+        Serial.print('R'); // notify over wifi ramp is occupied
+        // start sequence
+        
+        //check youve reached ramp
+
+        //allign with ramp
+        
+        // drive forward until stopped at end
+        for (i=0;i<=3;i++){
+        nav_grab(1);
+        }
+        //release box
+
+        //drive back
+        for (i=0;i<=3;i++){
+        nav_grab(2);
+        }
+        //validate out of ramp
+
+        // close set arms back to initial position
+
+        //turn 180 degrees and continue exploring
+
+        // finish sequence
+        Serial.print('G');
+    }
+    else
+    {
+        return;
+    }
 
     return 0;
 }
-void Communicate()
+
+void Check_Partner_statues(bool ramp) // check if ramp is clear or not
 {
-    
+    int incomingbyte;
+    if (Serial.available() > 0)
+    { // read the oldest byte in the serial buffer:
+
+        incomingByte = Serial.read();
+
+        // if it's a capital G, set ramp to open:
+
+        if (incomingByte == 'G')
+        {
+            ramp = 1;
+        }
+
+        // if it's a capital R, set ramp to occupied:
+
+        if (incomingByte == 'R')
+        {
+            ramp = 0;
+        }
+    }
 }
+
+void locate_ramp(bool go_to_base)
+{
+    go_to_base = 1; // tell robot to focus on reaching the base
+    return;
+}
+
 void loop()
 {
+    ramp_sequence(1);
+    delay(5000);
+    Serial.print('Done');
 }
