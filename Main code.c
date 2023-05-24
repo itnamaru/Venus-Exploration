@@ -120,7 +120,10 @@ void ramp_sequence()
 
     return 0;
 }
-
+void Communicate()
+{
+    
+}
 void loop()
 {
 }
