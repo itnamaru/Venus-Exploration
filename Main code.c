@@ -1,10 +1,16 @@
-#include <servo.h>
-servo myservo1;
-servo myservo2;
-servo myservo3;
-servo myservo4;
+#include <Servo.h>
+Servo myservo1;
+Servo myservo2;
+Servo myservo3;
+Servo myservo4;
 
 int pos = 0;
+int potpin = 0;
+int val1;
+int val2;
+int ramp = 1;
+int go_to_base = 0;
+int direction;
 void setup()
 {
     myservo1.attach(12); // right wheel
@@ -12,9 +18,6 @@ void setup()
     myservo3.attach(11); // Ultrasonic motor
     myservo4.attach(10); // grabbing motor
     Serial.begin(9600);  // serial connection for communication
-    int potpin = 0;
-    bool ramp = 1;
-    bool go_to_base = 0;
 }
 
 void nav_traverse(int direction) // code for navigating the map
@@ -61,7 +64,7 @@ void nav_traverse(int direction) // code for navigating the map
     return 0;
 }
 
-void nav_grab() // code for small increment movement for the grabbing sequence
+void nav_grab(int direction) // code for small increment movement for the grabbing sequence
 {
     val1 = analogRead(potpin);
     val2 = analogRead(potpin);
@@ -119,32 +122,39 @@ void ultrasonic() // US sensor code
     return 0;
 }
 
-void ramp_sequence(bool ramp)
+void ramp_sequence(int ramp)
 {
     if (ramp == 1)
     {
         Serial.print('R'); // notify over wifi ramp is occupied
-        // start sequence
-        
-        //check youve reached ramp
+                           // start sequence
 
-        //allign with ramp
-        
+        // check youve reached ramp
+
+        // allign with ramp
+
         // drive forward until stopped at end
-        for (i=0;i<=3;i++){
-        nav_grab(1);
-        }
-        //release box
+        nav_traverse(1);
+        delay(2000);
+        myservo1.detach();
+        myservo2.detach();
+        myservo1.attach(12); // right wheel
+        myservo2.attach(13); // left wheel
 
-        //drive back
-        for (i=0;i<=3;i++){
-        nav_grab(2);
-        }
-        //validate out of ramp
+        // release box
+
+        // drive back
+        nav_traverse(2);
+        delay(2000);
+        myservo1.detach();
+        myservo2.detach();
+        myservo1.attach(12); // right wheel
+        myservo2.attach(13); // left wheel
+        // validate out of ramp
 
         // close set arms back to initial position
 
-        //turn 180 degrees and continue exploring
+        // turn 180 degrees and continue exploring
 
         // finish sequence
         Serial.print('G');
@@ -157,9 +167,9 @@ void ramp_sequence(bool ramp)
     return 0;
 }
 
-void Check_Partner_statues(bool ramp) // check if ramp is clear or not
+void Check_Partner_statues(int ramp) // check if ramp is clear or not
 {
-    int incomingbyte;
+    int incomingByte;
     if (Serial.available() > 0)
     { // read the oldest byte in the serial buffer:
 
@@ -181,7 +191,7 @@ void Check_Partner_statues(bool ramp) // check if ramp is clear or not
     }
 }
 
-void locate_ramp(bool go_to_base)
+void locate_ramp(int go_to_base)
 {
     go_to_base = 1; // tell robot to focus on reaching the base
     return;
