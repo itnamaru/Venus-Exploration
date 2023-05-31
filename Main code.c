@@ -1,4 +1,6 @@
 #include <servo.h>
+#define pinIRt 4
+#define pinIRo 7
 servo myservo1;
 servo myservo2;
 servo myservo3;
@@ -9,7 +11,6 @@ Servo myservo;
 int pos;
 long duration, cm;
 const int pingPin = 7;
-#define pinIR 4
 int valIR;
 int pos = 0;
 void setup()
@@ -170,6 +171,30 @@ void IRt()
   else
   {
     // Serial.println("GO");
+  }
+}
+void IRt()
+{
+  valIR = digitalRead(pinIRt);
+  if (valIR == 0)
+  {
+    // Serial.println("STOP");
+  }
+  else
+  {
+    // Serial.println("GO");
+  }
+}
+void IRo()
+{
+  valIR = digitalRead(pinIRo);
+  if (valIR == 1)
+  {
+//     Serial.println("STOP");
+  }
+  else
+  {
+//     Serial.println("GO");
   }
 }
 void ramp_sequence()
