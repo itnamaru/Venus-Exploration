@@ -1,9 +1,9 @@
 
-#include <servo.h>
-servo myservo1;
-servo myservo2;
-servo myservo3;
-servo myservo4;
+#include <Servo.h>
+Servo myservo1;
+Servo myservo2;
+Servo myservo3;
+Servo myservo4;
 enum state
 {
     left,
@@ -338,7 +338,7 @@ void locate_ramp(int go_to_base)
         if (detected2 == 1)
         {
             delay(500);
-            ramp_sequence();
+            ramp_sequence(ramp);
             go_to_base = 0;
         }
         
