@@ -89,7 +89,7 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
     myservo2.attach(13); // left wheel
-    if(direction == 1)
+    if (direction == 1)
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
@@ -97,28 +97,32 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
         myservo1.detach();
         myservo2.detach();
     }
-    else if(direction == 2){
+    else if (direction == 2)
+    {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(300);
         myservo1.detach();
         myservo2.detach();
     }
-    else if(direction == 3){
+    else if (direction == 3)
+    {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(50);
         myservo1.detach();
         myservo2.detach();
     }
-    else if(direction == 4){
+    else if (direction == 4)
+    {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(50);
         myservo1.detach();
         myservo2.detach();
     }
-    else if(direction == 5){
+    else if (direction == 5)
+    {
         myservo1.detach();
         myservo2.detach();
     }
@@ -265,14 +269,16 @@ void locate_ramp(int go_to_base)
             detected2 = Base_IR_top();
             while (detected1 == 0)
             {
-                for (int i = 0; i < 40; i++) // first 360
+                for (int i = 0; i < 10; i++) // first 360
                 {
                     detected1 = Base_IR_front();
                     if (detected1 == 0) // start nav to locate base
                     {
                         nav_traverse(5);
+                        delay(500);
                         nav_grab(3);
                         nav_traverse(5);
+                        delay(500);
                     }
                     else // detects base
                     {
@@ -287,12 +293,16 @@ void locate_ramp(int go_to_base)
                     }
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 40; i++) // second 360
+                    for (int i = 0; i < 10; i++) // second 360
                     {
                         detected1 = Base_IR_front();
                         if (detected1 == 0) // start nav to locate base
                         {
+                            nav_traverse(5);
+                            delay(500);
                             nav_grab(3);
+                            nav_traverse(5);
+                            delay(500);
                         }
                         else // detects base
                         {
@@ -307,12 +317,16 @@ void locate_ramp(int go_to_base)
                     nav_traverse(4);
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 40; i++) // third 360
+                    for (int i = 0; i < 10; i++) // third 360
                     {
                         detected1 = Base_IR_front();
                         if (detected1 == 0) // start nav to locate base
                         {
+                            nav_traverse(5);
+                            delay(500);
                             nav_grab(3);
+                            nav_traverse(5);
+                            delay(500);
                         }
                         else // detects base
                         {
@@ -338,7 +352,6 @@ void locate_ramp(int go_to_base)
             ramp_sequence(ramp);
             go_to_base = 0;
         }
-        
     }
 
     return;
