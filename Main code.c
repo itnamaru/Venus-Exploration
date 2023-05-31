@@ -269,22 +269,30 @@ void locate_ramp(int go_to_base)
             detected2 = Base_IR_top();
             while (detected1 == 0)
             {
-                for (int i = 0; i < 23; i++) // first 360
-                {
-                    detected1 = Base_IR_front();
-                    if (detected1 == 0) // start nav to locate base
-                    {
-                        nav_traverse(5);
-                        delay(500);
-                        nav_grab(3);
-                        nav_traverse(5);
-                        delay(500);
-                    }
-                    else // detects base
-                    {
-                        break;
-                    }
-                }
+                // for (int i = 0; i < 23; i++) // first 360
+                // {
+                //     detected1 = Base_IR_front();
+                //     if (detected1 == 0) // start nav to locate base
+                //     {
+                //         nav_traverse(5);
+                //         delay(500);
+                //         nav_grab(3);
+                //         nav_traverse(5);
+                //         delay(500);
+                //     }
+                //     else // detects base
+                //     {
+                //         break;
+                //     }
+                // }
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
                 if (detected1 == 0)
                 {
                     for (int i = 0; i < 5; i++) // 45 degree turn to the right
@@ -293,47 +301,64 @@ void locate_ramp(int go_to_base)
                     }
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 23; i++) // second 360
-                    {
-                        detected1 = Base_IR_front();
-                        if (detected1 == 0) // start nav to locate base
-                        {
-                            nav_traverse(5);
-                            delay(500);
-                            nav_grab(3);
-                            nav_traverse(5);
-                            delay(500);
-                        }
-                        else // detects base
-                        {
-                            break;
-                        }
-                    }
+                    // for (int i = 0; i < 23; i++) // second 360
+                    // {
+                    //     detected1 = Base_IR_front();
+                    //     if (detected1 == 0) // start nav to locate base
+                    //     {
+                    //         nav_traverse(5);
+                    //         delay(500);
+                    //         nav_grab(3);
+                    //         nav_traverse(5);
+                    //         delay(500);
+                    //     }
+                    //     else // detects base
+                    //     {
+                    //         break;
+                    //     }
+                    // }
+                    nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
                 }
                 if (detected1 == 0)
                 {
+                    delay(1000);
                     nav_traverse(2);
                     delay(1000);
                     nav_traverse(4);
                     delay(1000);
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 23; i++) // third 360
-                    {
-                        detected1 = Base_IR_front();
-                        if (detected1 == 0) // start nav to locate base
-                        {
-                            nav_traverse(5);
-                            delay(500);
-                            nav_grab(3);
-                            nav_traverse(5);
-                            delay(500);
-                        }
-                        else // detects base
-                        {
-                            break;
-                        }
-                    }
+                    // for (int i = 0; i < 23; i++) // third 360
+                    // {
+                    //     detected1 = Base_IR_front();
+                    //     if (detected1 == 0) // start nav to locate base
+                    //     {
+                    //         nav_traverse(5);
+                    //         delay(500);
+                    //         nav_grab(3);
+                    //         nav_traverse(5);
+                    //         delay(500);
+                    //     }
+                    //     else // detects base
+                    //     {
+                    //         break;
+                    //     }
+                    // }
+                    nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
+                nav_traverse(3);
+                delay(500);
                 }
                 if (detected1 == 0)
                 {
