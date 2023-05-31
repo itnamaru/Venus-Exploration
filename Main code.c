@@ -11,7 +11,6 @@ enum state
 };
 state var;
 Servo myservo;
-int pos;
 long duration, cm;
 const int pingPin = 7;
 
@@ -268,14 +267,16 @@ void locate_ramp(int go_to_base)
         while (detected2 == 0)
         {
             detected2 = Base_IR_top();
-            while (detected == 0)
+            while (detected1 == 0)
             {
-                for (int i = 0; i < 10; i++) // first 360
+                for (int i = 0; i < 40; i++) // first 360
                 {
-                    detected1 = Base_IR();
+                    detected1 = Base_IR_front();
                     if (detected1 == 0) // start nav to locate base
                     {
+                        nav_traverse(5);
                         nav_grab(3);
+                        nav_traverse(5);
                     }
                     else // detects base
                     {
@@ -290,9 +291,9 @@ void locate_ramp(int go_to_base)
                     }
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 10; i++) // second 360
+                    for (int i = 0; i < 40; i++) // second 360
                     {
-                        detected1 = Base_IR();
+                        detected1 = Base_IR_front();
                         if (detected1 == 0) // start nav to locate base
                         {
                             nav_grab(3);
@@ -310,9 +311,9 @@ void locate_ramp(int go_to_base)
                     nav_traverse(4);
                     nav_traverse(1);
                     delay(1000);
-                    for (int i = 0; i < 10; i++) // second 360
+                    for (int i = 0; i < 40; i++) // third 360
                     {
-                        detected1 = Base_IR();
+                        detected1 = Base_IR_front();
                         if (detected1 == 0) // start nav to locate base
                         {
                             nav_grab(3);
