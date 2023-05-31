@@ -4,13 +4,16 @@ servo myservo1;
 servo myservo2;
 servo myservo3;
 servo myservo4;
-enum state {left, right};
+enum state
+{
+    left,
+    right
+};
 state var;
-Servo myservo; 
+Servo myservo;
 int pos;
 long duration, cm;
 const int pingPin = 7;
-
 
 int pos = 0;
 int potpin = 0;
@@ -28,10 +31,9 @@ void setup()
     Serial.begin(9600);  // serial connection for communication
 
     int potpin = 0;
-  myservo.attach(10);
-  var = left;
-  pos = 60;
-
+    myservo.attach(10);
+    var = left;
+    pos = 60;
 }
 
 void nav_traverse(int direction) // code for navigating the map
@@ -138,30 +140,30 @@ void IR() // IR sensor code
 
 void ultrasonic() // US sensor code
 {
-  switch (var) {
+    switch (var)
+    {
 
     case left:
-    pos += 1;
-    myservo.write(pos);                   // sets the servo position based on the variable 'pos'
-    delay(15);
-    if (pos ==  120)
-    {
-      var = right;
-    }
-    break;
+        pos += 1;
+        myservo.write(pos); // sets the servo position based on the variable 'pos'
+        delay(15);
+        if (pos == 120)
+        {
+            var = right;
+        }
+        break;
 
     case right:
-    pos -= 1;
-    myservo.write(pos);
-    delay(15);                   // sets the servo position based on the variable 'pos'
-    if (pos ==  60)
-    {
-      var = left;
+        pos -= 1;
+        myservo.write(pos);
+        delay(15); // sets the servo position based on the variable 'pos'
+        if (pos == 60)
+        {
+            var = left;
+        }
+        break;
     }
-    break;
-    
-  }
-  pinMode(pingPin, OUTPUT);
+    pinMode(pingPin, OUTPUT);
     digitalWrite(pingPin, LOW);
     delayMicroseconds(2);
     digitalWrite(pingPin, HIGH);
@@ -172,13 +174,14 @@ void ultrasonic() // US sensor code
     duration = pulseIn(pingPin, HIGH);
 
     cm = duration / 29 / 2;
-    Serial.print(cm);
-    Serial.print("cm");
-    Serial.println();
+    // Serial.print(cm);
+    // Serial.print("cm");
+    // Serial.println();
 }
 
-void grabby(){
-return 0;
+void grabby()
+{
+    return 0;
 }
 
 void ramp_sequence(int ramp)
@@ -194,7 +197,7 @@ void ramp_sequence(int ramp)
 
         // drive forward until stopped at end
         nav_traverse(1);
-        delay(7000);
+        delay(10000);
         nav_traverse(5);
         delay(5000);
 
@@ -202,7 +205,7 @@ void ramp_sequence(int ramp)
         grabby();
         // drive back
         nav_traverse(2);
-        delay(7000);
+        delay(10000);
         nav_traverse(5);
         // validate out of ramp
 
@@ -245,16 +248,109 @@ void Check_Partner_statues(int ramp) // check if ramp is clear or not
     }
 }
 
+int Base_IR_front() // code for checking base LED
+{
+    int detected = 0;
+    return detected;
+}
+
+int Base_IR_top() // code for checking base LED
+{
+    int detected = 0;
+    return detected;
+}
+
 void locate_ramp(int go_to_base)
 {
-    go_to_base = 1; // tell robot to focus on reaching the base
+    int detected1 = 0;   // sensor pointed towards base
+    int detected2 = 0;   // sensor to check if we reached the base
+    if (go_to_base == 1) // check if go to base is triggered
+    {
+        while (detected2 == 0)
+        {
+            detected2 = Base_IR_top();
+            while (detected == 0)
+            {
+                for (int i = 0; i < 10; i++) // first 360
+                {
+                    detected1 = Base_IR();
+                    if (detected1 == 0) // start nav to locate base
+                    {
+                        nav_grab(3);
+                    }
+                    else // detects base
+                    {
+                        break;
+                    }
+                }
+                if (detected1 == 0)
+                {
+                    for (int i = 0; i < 5; i++) // 45 degree turn to the right
+                    {
+                        nav_grab(3);
+                    }
+                    nav_traverse(1);
+                    delay(1000);
+                    for (int i = 0; i < 10; i++) // second 360
+                    {
+                        detected1 = Base_IR();
+                        if (detected1 == 0) // start nav to locate base
+                        {
+                            nav_grab(3);
+                        }
+                        else // detects base
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (detected1 == 0)
+                {
+                    nav_traverse(2);
+                    delay(1000);
+                    nav_traverse(4);
+                    nav_traverse(1);
+                    delay(1000);
+                    for (int i = 0; i < 10; i++) // second 360
+                    {
+                        detected1 = Base_IR();
+                        if (detected1 == 0) // start nav to locate base
+                        {
+                            nav_grab(3);
+                        }
+                        else // detects base
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (detected1 == 0)
+                {
+                    nav_traverse(3);
+                }
+            }
+            if (detected1 == 1)
+            {
+                nav_traverse(1);
+                delay(3000);
+            }
+            detected2 = Base_IR_top();
+        }
+        if (detected2 == 1)
+        {
+            delay(500);
+            ramp_sequence();
+            go_to_base = 0;
+        }
+        
+    }
+
     return;
 }
 
 void loop()
 {
     delay(5000);
-    ramp_sequence(1);
-    delay(5000);
+    locate_ramp(1);
     Serial.print('Done');
 }
