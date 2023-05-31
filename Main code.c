@@ -9,7 +9,8 @@ Servo myservo;
 int pos;
 long duration, cm;
 const int pingPin = 7;
-
+#define pinIR 4
+int valIR;
 int pos = 0;
 void setup()
 {
@@ -159,7 +160,18 @@ void ultrasonic()
     Serial.print("cm");
     Serial.println();
 }
-
+void IRt()
+{
+  valIR = digitalRead(pinIR);
+  if (valIR == 0)
+  {
+    // Serial.println("STOP");
+  }
+  else
+  {
+    // Serial.println("GO");
+  }
+}
 void ramp_sequence()
 {
 
