@@ -19,6 +19,7 @@ int val2;
 int ramp = 1;
 int go_to_base = 0;
 int direction;
+int angle = 0;
 void setup()
 {
     myservo1.attach(12); // right wheel
@@ -28,7 +29,6 @@ void setup()
     Serial.begin(9600);  // serial connection for communication
 
     int potpin = 0;
-  myservo.attach(10);
   var = left;
   pos = 60;
 
@@ -178,6 +178,7 @@ void ultrasonic() // US sensor code
 }
 
 void grabby(){
+
 return 0;
 }
 
