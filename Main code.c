@@ -128,7 +128,7 @@ void ultrasonic()
 
     case left:
     pos += 1;
-    myservo.write(pos);                   // sets the servo position based on the variable 'pos'
+    myservo3.write(pos);                   // sets the servo position based on the variable 'pos'
     delay(15);
     if (pos ==  120)
     {
@@ -138,7 +138,7 @@ void ultrasonic()
 
     case right:
     pos -= 1;
-    myservo.write(pos);
+    myservo3.write(pos);
     delay(15);                   // sets the servo position based on the variable 'pos'
     if (pos ==  60)
     {
