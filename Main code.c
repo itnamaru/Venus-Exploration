@@ -89,7 +89,7 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
     myservo2.attach(13); // left wheel
-    else if(direction == 1)
+    if(direction == 1)
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
