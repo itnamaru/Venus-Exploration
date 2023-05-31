@@ -89,42 +89,38 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     val2 = analogRead(potpin);
     myservo1.attach(12); // right wheel
     myservo2.attach(13); // left wheel
-    switch (direction)
+    else if(direction == 1)
     {
-    case '1': // forward
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(300);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '2': // backward
+    }
+    else if(direction == 2){
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(300);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '3': // right
+    }
+    else if(direction == 3){
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         delay(50);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '4': // left
+    }
+    else if(direction == 4){
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         delay(50);
         myservo1.detach();
         myservo2.detach();
-        break;
-    case '5': // stop
+    }
+    else if(direction == 5){
         myservo1.detach();
         myservo2.detach();
-        break;
-    default:
-        return;
     }
     myservo1.write(val1);
     myservo2.write(val2);
@@ -351,7 +347,6 @@ void locate_ramp(int go_to_base)
 void loop()
 {
     delay(5000);
-    nav_traverse(3);
-    delay(5000);
+    locate_ramp(1);
     Serial.print('Done');
 }
