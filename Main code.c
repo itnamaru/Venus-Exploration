@@ -11,7 +11,8 @@ Servo myservo;
 int pos;
 long duration, cm;
 const int pingPin = 7;
-int valIR;
+int valIRt;
+int valIRo;
 int pos = 0;
 void setup()
 {
@@ -176,7 +177,7 @@ void IRt()
 void IRt()
 {
   valIR = digitalRead(pinIRt);
-  if (valIR == 0)
+  if (valIRt == 0)
   {
     // Serial.println("STOP");
   }
@@ -188,7 +189,7 @@ void IRt()
 void IRo()
 {
   valIR = digitalRead(pinIRo);
-  if (valIR == 1)
+  if (valIRo == 1)
   {
 //     Serial.println("STOP");
   }
