@@ -331,7 +331,7 @@ void locate_ramp(int go_to_base)
                     delay(1000);
                     nav_traverse(2);
                     delay(1000);
-                    nav_traverse(4);
+                    nav_traverse(3);
                     delay(1000);
                     nav_traverse(1);
                     delay(1000);
@@ -385,6 +385,8 @@ void locate_ramp(int go_to_base)
 
 void loop()
 {
+    delay(5000);
+    nav_traverse(4);
     delay(5000);
     locate_ramp(1);
     Serial.print('Done');
