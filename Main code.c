@@ -1,9 +1,9 @@
 
-#include <servo.h>
-servo myservo1;
-servo myservo2;
-servo myservo3;
-servo myservo4;
+#include <Servo.h>
+Servo myservo1;
+Servo myservo2;
+Servo myservo3;
+Servo myservo4;
 enum state {left, right};
 state var;
 Servo myservo; 
@@ -178,7 +178,20 @@ void ultrasonic() // US sensor code
 }
 
 void grabby(){
-
+for (angle=90; angle>=40; angle-=1) //goes from 90 to 0 degrees
+{
+myservo.write(angle); //moves servo back in opposite direction
+delay(20); //waits 20ms between servo commands
+}
+/*
+for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+{
+myservo.write(angle); //directs servo to go to position in variable 'angle'
+delay(20);
+//waits 20ms between servo commands
+}
+*/
+exit(0);
 return 0;
 }
 
