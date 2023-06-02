@@ -4,13 +4,16 @@ Servo myservo1;
 Servo myservo2;
 Servo myservo3;
 Servo myservo4;
-enum state {left, right};
+enum state
+{
+    left,
+    right
+};
 state var;
-Servo myservo; 
+Servo myservo;
 int pos;
 long duration, cm;
 const int pingPin = 7;
-
 
 int pos = 0;
 int potpin = 0;
@@ -29,9 +32,8 @@ void setup()
     Serial.begin(9600);  // serial connection for communication
 
     int potpin = 0;
-  var = left;
-  pos = 60;
-
+    var = left;
+    pos = 60;
 }
 
 void nav_traverse(int direction) // code for navigating the map
@@ -138,30 +140,30 @@ void IR() // IR sensor code
 
 void ultrasonic() // US sensor code
 {
-  switch (var) {
+    switch (var)
+    {
 
     case left:
-    pos += 1;
-    myservo.write(pos);                   // sets the servo position based on the variable 'pos'
-    delay(15);
-    if (pos ==  120)
-    {
-      var = right;
-    }
-    break;
+        pos += 1;
+        myservo.write(pos); // sets the servo position based on the variable 'pos'
+        delay(15);
+        if (pos == 120)
+        {
+            var = right;
+        }
+        break;
 
     case right:
-    pos -= 1;
-    myservo.write(pos);
-    delay(15);                   // sets the servo position based on the variable 'pos'
-    if (pos ==  60)
-    {
-      var = left;
+        pos -= 1;
+        myservo.write(pos);
+        delay(15); // sets the servo position based on the variable 'pos'
+        if (pos == 60)
+        {
+            var = left;
+        }
+        break;
     }
-    break;
-    
-  }
-  pinMode(pingPin, OUTPUT);
+    pinMode(pingPin, OUTPUT);
     digitalWrite(pingPin, LOW);
     delayMicroseconds(2);
     digitalWrite(pingPin, HIGH);
@@ -177,22 +179,41 @@ void ultrasonic() // US sensor code
     Serial.println();
 }
 
-void grabby(){
-for (angle=90; angle>=40; angle-=1) //goes from 90 to 0 degrees
+void grabby_open()
 {
-myservo.write(angle); //moves servo back in opposite direction
-delay(20); //waits 20ms between servo commands
+    for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
+    {
+        myservo4.write(angle); // moves servo back in opposite direction
+        delay(20);            // waits 20ms between servo commands
+    }
+    /*
+    for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+    {
+    myservo4.write(angle); //directs servo to go to position in variable 'angle'
+    delay(20);
+    //waits 20ms between servo commands
+    }
+    */
+    return 0;
 }
-/*
-for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+
+void grabby_close()
 {
-myservo.write(angle); //directs servo to go to position in variable 'angle'
-delay(20);
-//waits 20ms between servo commands
-}
-*/
-exit(0);
-return 0;
+    /*
+    for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
+    {
+        myservo4.write(angle); // moves servo back in opposite direction
+        delay(20);            // waits 20ms between servo commands
+    }
+    */
+    for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+    {
+    myservo4.write(angle); //directs servo to go to position in variable 'angle'
+    delay(20);
+    //waits 20ms between servo commands
+    }
+    
+    return 0;
 }
 
 void ramp_sequence(int ramp)
@@ -268,7 +289,9 @@ void locate_ramp(int go_to_base)
 void loop()
 {
     delay(5000);
-    ramp_sequence(1);
+    // ramp_sequence(1);
+    grabby_open();
     delay(5000);
+    grabby_close();
     Serial.print('Done');
 }
