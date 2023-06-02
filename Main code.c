@@ -290,8 +290,8 @@ void loop()
     delay(5000);
     // ramp_sequence(1);
     grabby_open();
-    Serial.print('open');
+    Serial.println('open');
     delay(5000);
     grabby_close();
-    Serial.print('close');
+    Serial.println('close');
 }
