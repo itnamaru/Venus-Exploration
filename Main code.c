@@ -178,7 +178,7 @@ void ultrasonic() // US sensor code
     Serial.println();
 }
 
-void grabby_open()
+void grabby_close()
 {
     for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
     {
@@ -196,7 +196,7 @@ void grabby_open()
     return 0;
 }
 
-void grabby_close()
+void grabby_open()
 {
     /*
     for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
@@ -290,8 +290,8 @@ void loop()
     delay(5000);
     // ramp_sequence(1);
     grabby_open();
-    Serial.write('open');
+    Serial.println("open");
     delay(5000);
     grabby_close();
-    Serial.write('close');
+    Serial.println("close");
 }
