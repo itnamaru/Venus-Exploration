@@ -183,7 +183,7 @@ void grabby_close()
     for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
     {
         myservo4.write(angle); // moves servo back in opposite direction
-        delay(20);            // waits 20ms between servo commands
+        delay(20);             // waits 20ms between servo commands
     }
     /*
     for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
@@ -205,11 +205,11 @@ void grabby_open()
         delay(20);            // waits 20ms between servo commands
     }
     */
-    for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+    for (angle = 0; angle < 90; angle += 1) // goes from 0 to 90 degrees in steps of 1 degree
     {
-    myservo4.write(angle); //directs servo to go to position in variable 'angle'
-    delay(20);
-    //waits 20ms between servo commands
+        myservo4.write(angle); // directs servo to go to position in variable 'angle'
+        delay(20);
+        // waits 20ms between servo commands
     }
     return 0;
 }
@@ -350,13 +350,13 @@ void locate_ramp(int go_to_base)
                     //     }
                     // }
                     nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
                 }
                 if (detected1 == 0)
                 {
@@ -384,13 +384,13 @@ void locate_ramp(int go_to_base)
                     //     }
                     // }
                     nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
+                    nav_traverse(3);
+                    delay(500);
                 }
                 if (detected1 == 0)
                 {
@@ -419,9 +419,9 @@ void loop()
 {
     delay(5000);
     // ramp_sequence(1);
-    grabby_open();
+    grabby_close();
     Serial.println("open");
     delay(5000);
-    grabby_close();
-    Serial.println("close");
+    ramp_sequence();
+    Serial.println("Done");
 }
