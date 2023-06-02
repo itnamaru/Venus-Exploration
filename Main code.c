@@ -11,7 +11,6 @@ enum state
 };
 state var;
 Servo myservo;
-int pos;
 long duration, cm;
 const int pingPin = 7;
 
@@ -234,7 +233,7 @@ void ramp_sequence(int ramp)
         delay(5000);
 
         // release box
-        grabby();
+        grabby_open();
         // drive back
         nav_traverse(2);
         delay(7000);
