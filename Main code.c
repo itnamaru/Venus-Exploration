@@ -422,6 +422,6 @@ void loop()
     grabby_close();
     Serial.println("open");
     delay(5000);
-    ramp_sequence();
+    ramp_sequence(1);
     Serial.println("Done");
 }
