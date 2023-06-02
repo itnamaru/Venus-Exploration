@@ -21,6 +21,7 @@ int val2;
 int ramp = 1;
 int go_to_base = 0;
 int direction;
+int angle = 0;
 void setup()
 {
     myservo1.attach(12); // right wheel
@@ -177,8 +178,39 @@ void ultrasonic() // US sensor code
     // Serial.println();
 }
 
-void grabby()
+void grabby_close()
 {
+    for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
+    {
+        myservo4.write(angle); // moves servo back in opposite direction
+        delay(20);            // waits 20ms between servo commands
+    }
+    /*
+    for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+    {
+    myservo4.write(angle); //directs servo to go to position in variable 'angle'
+    delay(20);
+    //waits 20ms between servo commands
+    }
+    */
+    return 0;
+}
+
+void grabby_open()
+{
+    /*
+    for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
+    {
+        myservo4.write(angle); // moves servo back in opposite direction
+        delay(20);            // waits 20ms between servo commands
+    }
+    */
+    for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+    {
+    myservo4.write(angle); //directs servo to go to position in variable 'angle'
+    delay(20);
+    //waits 20ms between servo commands
+    }
     return 0;
 }
 
@@ -200,7 +232,7 @@ void ramp_sequence(int ramp)
         delay(5000);
 
         // release box
-        grabby();
+        grabby_open();
         // drive back
         nav_traverse(2);
         delay(10000);
@@ -386,8 +418,10 @@ void locate_ramp(int go_to_base)
 void loop()
 {
     delay(5000);
-    nav_traverse(4);
+    // ramp_sequence(1);
+    grabby_open();
+    Serial.println("open");
     delay(5000);
-    locate_ramp(1);
-    Serial.print('Done');
+    grabby_close();
+    Serial.println("close");
 }
