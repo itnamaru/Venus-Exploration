@@ -280,13 +280,13 @@ void Check_Partner_statues(int ramp) // check if ramp is clear or not
 
 int Base_IR_front() // code for checking base LED
 {
-    int detected = 0;
+    int detected = 1;
     return detected;
 }
 
 int Base_IR_top() // code for checking base LED
 {
-    int detected = 0;
+    int detected = 1;
     return detected;
 }
 
@@ -329,7 +329,7 @@ void locate_ramp(int go_to_base)
 void loop()
 {
     delay(5000);
-    locate_ramp(1)
+    locate_ramp(1);
     delay(5000);
     ramp_sequence(1);
     Serial.println("Done");
