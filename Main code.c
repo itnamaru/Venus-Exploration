@@ -296,114 +296,26 @@ void locate_ramp(int go_to_base)
     int detected2 = 0;   // sensor to check if we reached the base
     if (go_to_base == 1) // check if go to base is triggered
     {
-        while (detected2 == 0)
+
+        for (int i = 0; i < 23; i++) // first 360
         {
-            detected2 = Base_IR_top();
-            while (detected1 == 0)
+            detected1 = Base_IR_front();
+            if (detected1 == 0) // start nav to locate base
             {
-                // for (int i = 0; i < 23; i++) // first 360
-                // {
-                //     detected1 = Base_IR_front();
-                //     if (detected1 == 0) // start nav to locate base
-                //     {
-                //         nav_traverse(5);
-                //         delay(500);
-                //         nav_grab(3);
-                //         nav_traverse(5);
-                //         delay(500);
-                //     }
-                //     else // detects base
-                //     {
-                //         break;
-                //     }
-                // }
-                nav_traverse(3);
+                nav_traverse(5);
                 delay(500);
-                nav_traverse(3);
+                nav_grab(3);
+                nav_traverse(5);
                 delay(500);
-                nav_traverse(3);
-                delay(500);
-                nav_traverse(3);
-                delay(500);
-                if (detected1 == 0)
-                {
-                    for (int i = 0; i < 5; i++) // 45 degree turn to the right
-                    {
-                        nav_grab(3);
-                    }
-                    nav_traverse(1);
-                    delay(1000);
-                    // for (int i = 0; i < 23; i++) // second 360
-                    // {
-                    //     detected1 = Base_IR_front();
-                    //     if (detected1 == 0) // start nav to locate base
-                    //     {
-                    //         nav_traverse(5);
-                    //         delay(500);
-                    //         nav_grab(3);
-                    //         nav_traverse(5);
-                    //         delay(500);
-                    //     }
-                    //     else // detects base
-                    //     {
-                    //         break;
-                    //     }
-                    // }
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                }
-                if (detected1 == 0)
-                {
-                    delay(1000);
-                    nav_traverse(2);
-                    delay(1000);
-                    nav_traverse(3);
-                    delay(1000);
-                    nav_traverse(1);
-                    delay(1000);
-                    // for (int i = 0; i < 23; i++) // third 360
-                    // {
-                    //     detected1 = Base_IR_front();
-                    //     if (detected1 == 0) // start nav to locate base
-                    //     {
-                    //         nav_traverse(5);
-                    //         delay(500);
-                    //         nav_grab(3);
-                    //         nav_traverse(5);
-                    //         delay(500);
-                    //     }
-                    //     else // detects base
-                    //     {
-                    //         break;
-                    //     }
-                    // }
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                    nav_traverse(3);
-                    delay(500);
-                }
-                if (detected1 == 0)
-                {
-                    nav_traverse(3);
-                }
             }
-            if (detected1 == 1)
+            else // detects base
             {
                 nav_traverse(1);
-                delay(3000);
+                delay(1000);
+                break;
             }
-            detected2 = Base_IR_top();
         }
+        detected2 = Base_IR_top();
         if (detected2 == 1)
         {
             delay(500);
@@ -411,16 +323,13 @@ void locate_ramp(int go_to_base)
             go_to_base = 0;
         }
     }
-
     return;
 }
 
 void loop()
 {
     delay(5000);
-    // ramp_sequence(1);
-    grabby_close();
-    Serial.println("open");
+    locate_ramp(1)
     delay(5000);
     ramp_sequence(1);
     Serial.println("Done");
