@@ -33,6 +33,7 @@ void setup()
     int potpin = 0;
     var = left;
     pos = 60;
+    nav_traverse(5);
 }
 
 void nav_traverse(int direction) // code for navigating the map
@@ -180,7 +181,7 @@ void ultrasonic() // US sensor code
 
 void grabby_close()
 {
-    for (angle = 90; angle >= 40; angle -= 1) // goes from 90 to 0 degrees
+    for (angle = 90; angle >= 10; angle -= 1) // goes from 90 to 0 degrees
     {
         myservo4.write(angle); // moves servo back in opposite direction
         delay(20);             // waits 20ms between servo commands
@@ -328,9 +329,59 @@ void locate_ramp(int go_to_base)
 
 void loop()
 {
+    
+    Serial.println("forward");
     delay(5000);
-    // locate_ramp(1);
+    nav_traverse(1);
     delay(5000);
-    ramp_sequence(1);
+    Serial.println("stop");
+    delay(50);
+    nav_traverse(5);
+    Serial.println("backwards");
+    delay(500);
+    nav_traverse(2);
+    delay(5000);
+    Serial.println("stop");
+    delay(50);
+    nav_traverse(5);
+    Serial.println("right");
+    delay(500);
+    nav_traverse(3);
+    delay(5000);
+    Serial.println("left");
+    delay(500);
+    nav_traverse(4);
+    delay(500);
+    Serial.println("Done");
+    delay(1000);
+    Serial.println("open");
+    grabby_open();
+    delay(1000);
+    Serial.println("close");
+    grabby_close();
+    delay(1000);
+
+    Serial.println("forward");
+    delay(500);
+    nav_grab(1);
+    delay(5000);
+    Serial.println("stop");
+    delay(50);
+    nav_grab(5);
+    Serial.println("backwards");
+    delay(500);
+    nav_grab(2);
+    delay(5000);
+    Serial.println("stop");
+    delay(50);
+    nav_grab(5);
+    Serial.println("right");
+    delay(500);
+    nav_grab(3);
+    delay(5000);
+    Serial.println("left");
+    delay(500);
+    nav_grab(4);
+    delay(500);
     Serial.println("Done");
 }
