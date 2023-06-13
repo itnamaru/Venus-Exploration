@@ -8,7 +8,7 @@ const int servoPin = 9;         // Servo control pin
 
 // Servo configuration
 Servo myservo;
-int servoPosition = 0;          // Initial servo position
+int angle=0;          // Initial servo position
 
 // Variables for IR sensor
 int rightSensorState = LOW;     // Current state of the right IR sensor
@@ -20,10 +20,25 @@ void setup() {
   pinMode(rightSensorPin, INPUT);    // Set right IR sensor pin as input
   pinMode(leftSensorPin, INPUT);     // Set left IR sensor pin as input
   pinMode(centerSensorPin, INPUT);   // Set center IR sensor pin as input
-  myservo.attach(servoPin);          // Attach servo to the servo pin
+  myservo.attach(10); //attaches the servo on pin 9 to the servo object
 }
 
 void loop() {
+  
+  //for grabbing sequence
+  for (angle=90; angle>=40; angle-=1) //goes from 90 to 0 degrees
+{
+myservo.write(angle); //moves servo back in opposite direction
+delay(20); //waits 20ms between servo commands
+}
+for (angle=0; angle<90; angle+=1)//goes from 0 to 90 degrees in steps of 1 degree
+{
+myservo.write(angle); //directs servo to go to position in variable 'angle'
+delay(20);
+//waits 20ms between servo commands
+}
+  
+  
   // Read the current state of each IR sensor
   rightSensorState = digitalRead(rightSensorPin);
   leftSensorState = digitalRead(leftSensorPin);
