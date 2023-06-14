@@ -44,14 +44,14 @@ void nav_traverse(int direction) // code for navigating the map
     myservo2.attach(13); // left wheel
     if (direction == 1)  // forward
     {
-        val1 = map(val1, 0, 1023, 180, 0);
-        val2 = map(val2, 0, 1023, 0, 180);
+        val1 = map(val1, 0, 1023, 0, 180);
+        val2 = map(val2, 0, 1023, 180, 0);
         delay(50);
     }
     else if (direction == 2) // backward
     {
-        val1 = map(val1, 0, 1023, 0, 180);
-        val2 = map(val2, 0, 1023, 180, 0);
+        val1 = map(val1, 0, 1023, 180, 0);
+        val2 = map(val2, 0, 1023, 0, 180);
         delay(50);
     }
     else if (direction == 3) // right
@@ -59,7 +59,7 @@ void nav_traverse(int direction) // code for navigating the map
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(500);
         myservo1.detach();
         myservo2.detach();
@@ -69,7 +69,7 @@ void nav_traverse(int direction) // code for navigating the map
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(500);
         myservo1.detach();
         myservo2.detach();
@@ -97,20 +97,20 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     myservo2.attach(13); // left wheel
     if (direction == 1)
     {
-        val1 = map(val1, 0, 1023, 180, 0);
-        val2 = map(val2, 0, 1023, 0, 180);
+        val1 = map(val1, 0, 1023, 0, 180);
+        val2 = map(val2, 0, 1023, 180, 0);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(300);
         myservo1.detach();
         myservo2.detach();
     }
     else if (direction == 2)
     {
-        val1 = map(val1, 0, 1023, 0, 180);
-        val2 = map(val2, 0, 1023, 180, 0);
+        val1 = map(val1, 0, 1023, 180, 0);
+        val2 = map(val2, 0, 1023, 0, 180);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(300);
         myservo1.detach();
         myservo2.detach();
@@ -120,7 +120,7 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(50);
         myservo1.detach();
         myservo2.detach();
@@ -130,7 +130,7 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
         myservo1.write(val1);
-    myservo2.write(val2);
+        myservo2.write(val2);
         delay(50);
         myservo1.detach();
         myservo2.detach();
@@ -339,7 +339,7 @@ void locate_ramp(int go_to_base)
 
 void loop()
 {
-    
+
     Serial.println("forward");
     delay(5000);
     nav_traverse(1);
