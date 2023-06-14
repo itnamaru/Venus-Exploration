@@ -58,6 +58,8 @@ void nav_traverse(int direction) // code for navigating the map
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(500);
         myservo1.detach();
         myservo2.detach();
@@ -66,6 +68,8 @@ void nav_traverse(int direction) // code for navigating the map
     {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(500);
         myservo1.detach();
         myservo2.detach();
@@ -95,6 +99,8 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 0, 180);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(300);
         myservo1.detach();
         myservo2.detach();
@@ -103,6 +109,8 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 180, 0);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(300);
         myservo1.detach();
         myservo2.detach();
@@ -111,6 +119,8 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     {
         val1 = map(val1, 0, 1023, 180, 0);
         val2 = map(val2, 0, 1023, 180, 0);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(50);
         myservo1.detach();
         myservo2.detach();
@@ -119,6 +129,8 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
     {
         val1 = map(val1, 0, 1023, 0, 180);
         val2 = map(val2, 0, 1023, 0, 180);
+        myservo1.write(val1);
+    myservo2.write(val2);
         delay(50);
         myservo1.detach();
         myservo2.detach();
@@ -128,8 +140,6 @@ void nav_grab(int direction) // code for small increment movement for the grabbi
         myservo1.detach();
         myservo2.detach();
     }
-    myservo1.write(val1);
-    myservo2.write(val2);
     return 0;
 }
 
