@@ -286,7 +286,7 @@ int Base_IR_front() // code for checking base LED
 
 int Base_IR_top() // code for checking base LED
 {
-    int detected = 1;
+    int detected = 0;
     return detected;
 }
 
@@ -296,24 +296,20 @@ void locate_ramp(int go_to_base)
     int detected2 = 0;   // sensor to check if we reached the base
     if (go_to_base == 1) // check if go to base is triggered
     {
-
-        for (int i = 0; i < 23; i++) // first 360
+        detected1 = Base_IR_front();
+        if (detected1 == 0) // start nav to locate base
         {
-            detected1 = Base_IR_front();
-            if (detected1 == 0) // start nav to locate base
-            {
-                nav_traverse(5);
-                delay(500);
-                nav_grab(3);
-                nav_traverse(5);
-                delay(500);
-            }
-            else // detects base
-            {
-                nav_traverse(1);
-                delay(1000);
-                break;
-            }
+            nav_traverse(3);
+            nav_traverse(1);
+            delay(500);
+            locate_ramp(go_to_base);
+            break;
+        }
+        else // detects base
+        {
+            nav_traverse(1);
+            locate_ramp(go_to_base);
+            break;
         }
         detected2 = Base_IR_top();
         if (detected2 == 1)
