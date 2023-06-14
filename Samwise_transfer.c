@@ -254,6 +254,18 @@ void ramp_sequence(int ramp)
     return 0;
 }
 
+void graby_sequence(int Base_IR_front) {
+    if (Base_IR_front == 1){
+        
+        nav_traverse(1);
+        delay(10000);
+        nav_traverse(5);
+        delay(5000);
+        
+        grabby_close();
+    }
+}
+
 void Check_Partner_statues(int ramp) // check if ramp is clear or not
 {
     int incomingByte;
@@ -289,6 +301,8 @@ int Base_IR_top() // code for checking base LED
     int detected = 1;
     return detected;
 }
+
+
 
 void locate_ramp(int go_to_base)
 {
@@ -328,9 +342,10 @@ void locate_ramp(int go_to_base)
 
 void loop()
 {
-    delay(5000);
+   delay(5000);
     // locate_ramp(1);
     delay(5000);
     ramp_sequence(1);
     Serial.println("Done");
+       
 }
