@@ -231,7 +231,13 @@ void ramp_sequence(int ramp)
     if (ramp == 1)
     {
         Serial.print('R'); // notify over wifi ramp is occupied
-                           // start sequence
+        // wait for confirmations
+        incomingByte = Serial.read();
+        while (incomingByte != 'C')
+        {
+            incomingByte = Serial.read();
+        }
+        // start sequence
 
         // check youve reached ramp
 
@@ -273,6 +279,8 @@ void Check_Partner_statues(int ramp) // check if ramp is clear or not
     { // read the oldest byte in the serial buffer:
 
         incomingByte = Serial.read();
+        // send acknowledgement
+        Serial.println('C');
 
         // if it's a capital G, set ramp to open:
 
