@@ -74,6 +74,26 @@ void nav_traverse(int direction) // code for navigating the map
         myservo1.detach();
         myservo2.detach();
     }
+    else if (direction == 6) // 180 right
+    {
+        val1 = map(val1, 0, 1023, 180, 0);
+        val2 = map(val2, 0, 1023, 180, 0);
+        myservo1.write(val1);
+        myservo2.write(val2);
+        delay(1000);
+        myservo1.detach();
+        myservo2.detach();
+    }
+    else if (direction == 7) // 180 left
+    {
+        val1 = map(val1, 0, 1023, 0, 180);
+        val2 = map(val2, 0, 1023, 0, 180);
+        myservo1.write(val1);
+        myservo2.write(val2);
+        delay(1000);
+        myservo1.detach();
+        myservo2.detach();
+    }
     else if (direction == 5) // stop
     {
         myservo1.detach();
